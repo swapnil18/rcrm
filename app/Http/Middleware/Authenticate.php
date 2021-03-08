@@ -62,7 +62,7 @@ class Authenticate
             ], 400);
         }
 
-        $user = \App\Models\Users::where('is_active', '=', 1 )->find($credentials->sub);
+        $user = \App\Models\Users::where('is_active', '=', 1 )->where('user_token', '=', $token )->find($credentials->sub);
 
         if (!$user) {
             return response([

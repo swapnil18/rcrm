@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Candidates extends Model
 {
@@ -53,9 +54,9 @@ class Candidates extends Model
             'last_name' => 'required',
             'email' => 'required|email|unique:candidates',
             'contact_number' => 'required|digits:10',
-            'gender' => 'required',
-            'work_ex_year' => 'required',
-            'candidate_dob' => 'required',
+            'gender' => 'required|numeric',
+            'work_ex_year' => 'required|numeric',
+            'candidate_dob' => 'required|date_format:Y-m-d',
             'resume' => 'required|mimes:doc,pdf,docx|max:2048'
         ];
         return $rules;
@@ -75,6 +76,7 @@ class Candidates extends Model
             if($request->file('resume')->move($destinationPath, $picName)) {
                 $request = $request->all();
                 $request['resume'] =  $picName;
+                $request['candidate_dob'] = Carbon::createFromDate($request['candidate_dob'])->timestamp;
                 $candidates = Candidates::create($request);
             }            
         }
