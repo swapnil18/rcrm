@@ -30,7 +30,8 @@ class Candidates extends Migration
         $table->integer('created_by',11)->nullable()->default('NULL');
         $table->integer('modified_by',11)->nullable()->default('NULL');
         $table->datetime('modified_on')->nullable()->default('NULL');
-        $table->primary('id');    
+        $table->primary('id');   
+        }); 
     }
 
     /**
