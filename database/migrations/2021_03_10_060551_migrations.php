@@ -13,14 +13,16 @@ class Migrations extends Migration
      */
     public function up()
     {
-        Schema::create('migrations', function (Blueprint $table) {
+        if (!Schema::hasTable('migrations')) {
+            Schema::create('migrations', function (Blueprint $table) {
 
-            $table->increments(id)->unsigned();
-            $table->string('migration');
-            $table->integer('batch',11);
-            $table->primary('id');
+                $table->increments('id')->unsigned();
+                $table->string('migration');
+                $table->integer('batch',11);
+                $table->primary('id');
 
-        });    
+            });
+        }
     }
 
     /**
