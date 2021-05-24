@@ -22,9 +22,9 @@ $router->get('/jwtkey/{id}',['uses' => 'ExampleController@jwtkey']);
 //$router->get('candidates', 'CandidatesController@create');
 
 $router->group(['middleware' => 'auth','prefix' => 'v1'], function () use ($router) {
-  $router->post('candidates',  ['uses' => 'CandidatesController@create']); 
+  $router->post('candidates',  ['uses' => 'CandidatesController@create']);
   $router->get('candidates', ['uses' => 'CandidatesController@listCandidate']);
-  $router->get('candidates/search', ['uses' => 'CandidatesController@searchCandidate']);
+  $router->post('candidates/search', ['uses' => 'CandidatesController@searchCandidate']);
   $router->get('candidates/{id}', ['uses' => 'CandidatesController@showCandidate']);
 });
 
